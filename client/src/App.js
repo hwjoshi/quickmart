@@ -34,6 +34,7 @@ function App() {
   useEffect(() => {
     if (orderId) {
       socket.on('driver:location', (loc) => {
+        console.log('Received driver location for order', orderId, loc);
         if (loc.orderId === orderId) {
           setTrackingLocation({ lat: loc.lat, lng: loc.lng });
         }
@@ -129,6 +130,7 @@ function App() {
 
   const sendDriverLocation = () => {
     if (!driverOrderId) return;
+        console.log('Received driver location for order', orderId, loc);
     socket.emit('driver:location', { orderId: driverOrderId, lat: driverLocation.lat, lng: driverLocation.lng });
     alert('Location sent');
   };
